@@ -12,6 +12,7 @@ class UserRegisterForm(UserCreationForm):
         attrs={'placeholder': 'Mot de passe'}))
     password2 = forms.CharField(widget=forms.PasswordInput(
         attrs={'placeholder': 'Confirmer le mot de passe'}))
+    
     class Meta:
         model = User
         fields = ['username', 'email']

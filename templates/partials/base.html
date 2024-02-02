@@ -493,8 +493,8 @@
                           >
                         </li>
                         <li>
-                          <a href="page-login.html"
-                            ><i class="fi fi-rs-sign-out mr-10"></i>Sign out</a
+                          <a href={%url 'userauths:sign-out' %}
+                            ><i class="fi fi-rs-sign-out mr-10"></i>Deconnecter</a
                           >
                         </li>
                       </ul>
@@ -896,7 +896,7 @@
                             <a href="shop-product-right.html"
                               ><img
                                 src="{% static 'assets/imgs/banner/banner-menu.png' %}"
-                                alt="Nest"
+                                alt=""
                             /></a>
                             <div class="menu-banner-content">
                               <h4>Hot deals</h4>
