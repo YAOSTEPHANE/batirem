@@ -9,62 +9,59 @@ User = settings.AUTH_USER_MODEL
 
 
 def register_view(request):
-
+    
     if request.method == "POST":
         form = UserRegisterForm(request.POST or None)
         if form.is_valid():
             new_user = form.save()
-            username = form.cleaned_data.get('username')
-            messages.success(
-                request, f"Hé {username}, Votre compte a été créé avec succès.")
+            username = form.cleaned_data.get("nom utilisateur")
+            messages.success(request, f"Hey {username}, Ton compte a été crée avec succes.")
             new_user = authenticate(username=form.cleaned_data['email'],
-                                    password=form.cleaned_data['password1'],
-                                    )
+                                    password=form.cleaned_data['password1']
+            )
             login(request, new_user)
-            return redirect('core:index')
-
+            return redirect("core:index")
     else:
-        print("Utilisateur non enregistré")
         form = UserRegisterForm()
+
 
     context = {
         'form': form,
     }
-    return render(request, 'userauths/sign-up.html', context)
+    return render(request, "userauths/sign-up.html", context)
 
 
 def login_view(request):
     if request.user.is_authenticated:
-        messages.warning(request, f"Hé vous êtes deja connecté.")
-        return redirect('core:index')
-
+        messages.warning(request, f"Hé vous etes deja connecté.")
+        return redirect("core:index")
+    
     if request.method == "POST":
-        email = request.POST.get("email")  # batirem@gmail.com
-        password = request.POST.get("password")  # Yk48976031
+        email = request.POST.get("email") # peanuts@gmail.com
+        password = request.POST.get("password") # getmepeanuts
 
         try:
             user = User.objects.get(email=email)
+            user = authenticate(request, email=email, password=password)
 
+            if user is not None:
+                login(request, user)
+                messages.success(request, "Vous etes connecté.")
+                return redirect("core:index")
+            else:
+                messages.warning(request, "L'utilisateur n'existe pas creer un compte.")
+    
         except:
             messages.warning(request, f"Utilisateur avec {email} n'existe pas")
+        
 
-        user = authenticate(request, email=email, password=password)
+    
+    return render(request, "userauths/sign-in.html")
 
-        if user is not None:
-            login(request, user)
-            messages.success(request, "Vous êtes connecté")
-            return redirect('core:index')
-        else:
-            messages.warning(
-                request, "Utilisateur n'existe pas, créer un compte.")
-
-            context = {
-
-            }
-            return render(request, 'userauths/sign-in.html', context)
-
+        
 
 def logout_view(request):
+
     logout(request)
-    messages.success(request, "Vous êtes déconnecté")
-    return redirect('userauths:sign-in')
+    messages.success(request, "Vous etes deconnecté.")
+    return redirect("userauths:sign-in")

@@ -140,11 +140,11 @@ MEDIA_ROOT = os.path.join( BASE_DIR, "media" )
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
-JAZZMIN_SETTINGS =  {
-    'site_header': "Batirem",
-    'site_brand': "Ta commande",
+JAZZMIN_SETTINGS = {
+    'site_header': "Ta Commande, nous livrons",
+    'site_brand': "Batirem Shop",
     'site_logo': "assets/imgs/theme/loading.gif",
-    'copyright': "batirem.com",
+    'copyright': "Batirem.com",
 }
 
 AUTH_USER_MODEL = 'userauths.User'
