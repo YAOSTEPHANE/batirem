@@ -149,10 +149,11 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 JAZZMIN_SETTINGS = {
-    'site_header': "Desphixs Shop",
-    'site_brand': "You order, we deliver",
+    'site_header': "Batirem Boutique",
+    'site_brand': "Ta Commande",
     'site_logo': "assets/imgs/theme/loading.gif",
-    'copyright': "desphixs-shop.com",
+    'copyright': "batirem-ci.com",
+    
 }
 
 

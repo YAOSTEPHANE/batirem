@@ -1,7 +1,5 @@
 (function($) {
-    
     "use strict";
-    
 
     /*Sale statistics Chart*/
     if ($('#myChart').length) {
@@ -11,10 +9,8 @@
             type: 'line',
 
             // The data for our dataset
-            
             data: {
-                
-                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov'],
+                labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
                 datasets: [{
                         label: 'Sales',
                         tension: 0.3,
@@ -104,8 +100,4 @@
         });
     } //end if
 
-
-    
 })(jQuery);
-
-
