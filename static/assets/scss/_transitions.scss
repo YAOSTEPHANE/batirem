@@ -1,5 +1,8 @@
+$transition-duration: 300ms;
+
 .fade {
-  @include transition($transition-fade);
+  transition: opacity $transition-duration;
+  transition-timing-function: ease;
 
   &:not(.show) {
     opacity: 0;
@@ -12,8 +15,11 @@
   }
 }
 
-.collapsing {
+.panel-collapse.collapsing {
   height: 0;
   overflow: hidden;
-  @include transition($transition-collapse);
+  transition: height $transition-duration, padding 0 linear $transition-duration;
+  transition-property: height, padding;
+  transition-duration: $transition-duration, 0;
+  transition-timing-function: ease, linear;
 }
