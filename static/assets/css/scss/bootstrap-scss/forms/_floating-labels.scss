@@ -1,1 +1,41 @@
-No Content: https://wp.alithemes.com/html/nest/backend/assets/css/scss/bootstrap-scss/forms/_floating-labels.scss
+// Define the $colors variable
+$colors: (
+  "primary": #0070f3,
+  "secondary": #6c757d,
+  "success": #28a745,
+  "danger": #dc3545,
+  "warning": #ffc107,
+  "info": #17a2b8,
+  "light": #f8f9fa,
+  "dark": #343a40
+);
+
+// Define the $float-label-colors variable
+$float-label-colors: map-keys($colors);
+
+// Define the floating label mixin
+@mixin floating-label($color) {
+  &.form-floating-label {
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 0.375rem 0.75rem;
+    margin: -0.375rem 0;
+    font-size: 0.75rem;
+    line-height: 1.5;
+    color: #6c757d;
+    background-color: rgba(white, 0.5);
+    transition: all 0.15s ease-in-out;
+    pointer-events: none;
+
+    &.active,
+    &:focus {
+      color: map-get($colors, $color);
+      background-color: rgba(map-get($colors, $color), 0.5);
+      font-weight: 700;
+    }
+  }
+}
+
+// Use the floating label mixin
+.form
