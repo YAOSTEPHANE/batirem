@@ -1,10 +1,23 @@
-//
-// Form text
-//
+// Form text styles
+
+// Margin top for form text
+$form-text-margin-top: 5px;
+
+// Font size for form text
+$form-text-font-size: 14px;
+
+// Font style for form text
+$form-text-font-style: normal;
+
+// Font weight for form text
+$form-text-font-weight: normal;
+
+// Color for form text
+$form-text-color: #333;
 
 .form-text {
   margin-top: $form-text-margin-top;
-  @include font-size($form-text-font-size);
+  font-size: $form-text-font-size;
   font-style: $form-text-font-style;
   font-weight: $form-text-font-weight;
   color: $form-text-color;
