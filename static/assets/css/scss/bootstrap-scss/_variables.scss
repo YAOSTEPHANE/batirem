@@ -1,1 +1,21 @@
-No Content: https://wp.alithemes.com/html/nest/backend/assets/css/scss/bootstrap-scss/_variables.scss
+// Define variables
+$primary-color: #007bff;
+$secondary-color: #6c757d;
+$font-size-base: 1rem;
+
+// Import Bootstrap's default variables
+@import "bootstrap/scss/_variables";
+
+// Override Bootstrap's default variables with our own
+$body-bg: #f5f5f5;
+$text-color: #333;
+
+// Compile Bootstrap with our variables
+@import "bootstrap";
+
+// Use variables in our custom styles
+.my-button {
+  background-color: $primary-color;
+  color: $text-color;
+  font-size: $font-size-base;
+}
