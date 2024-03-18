@@ -1,9 +1,47 @@
-@mixin alert-variant($background, $border, $color) {
+@mixin alert-variant($background: null, $border: null, $color: null, $link-color: null) {
+  $link-color: if($link-color, $link-color, shade-color($color, 20%));
+
   color: $color;
-  @include gradient-bg($background);
+  background: $background;
   border-color: $border;
 
-  .alert-link {
-    color: shade-color($color, 20%);
+  &,
+  a {
+    color: $color;
   }
+
+  a {
+    &:not(.alert-link) {
+      color: $link-color;
+    }
+  }
+
+  .alert-link {
+    color: $link-color;
+  }
+
+  @if $background and not gradient-bg-value($background) {
+    background: $background;
+  }
+
+  @if $background == 'gradient' {
+    @include gradient-bg($background);
+  }
+}
+
+// Usage example:
+.alert-danger {
+  @include alert-variant(
+    $background: $danger-bg,
+    $border: $danger-border,
+    $color: $danger-color
+  );
+}
+
+.alert-success {
+  @include alert-variant(
+    $background: 'gradient',
+    $border: $success-border,
+    $color: $success-color
+  );
 }
