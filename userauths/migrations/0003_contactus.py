@@ -12,13 +12,18 @@ class Migration(migrations.Migration):
     operations = [
         migrations.CreateModel(
             name='ContactUs',
+            db_table='contact_us',
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('full_name', models.CharField(max_length=200)),
-                ('email', models.CharField(max_length=200)),
-                ('phone', models.CharField(max_length=200)),
-                ('subject', models.CharField(max_length=200)),
+                ('email', models.EmailField(max_length=200, unique=True)),
+                ('phone', models.CharField(blank=True, max_length=200, null=True)),
+                ('subject', models.CharField(max_length=200, unique_together='email', verbose_name='email and subject')),
                 ('message', models.TextField()),
             ],
+            options={
+                'ordering': ('-id',),
+            },
         ),
     ]
+
