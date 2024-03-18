@@ -1,1 +1,56 @@
-No Content: https://wp.alithemes.com/html/nest/backend/assets/css/scss/bootstrap-scss/_carousel.scss
+// Custom carousel styles
+
+// Import Bootstrap's carousel mixins
+@import "bootstrap-scss/bootstrap";
+
+// Custom variables
+$carousel-indicator-active-bg: $gray-900;
+$carousel-control-color: $gray-900;
+
+// Carousel controls
+.carousel-control-next {
+  @extend .carousel-control-next-icon;
+  @include bg-color($carousel-control-color);
+  &:hover,
+  &:focus {
+    @include bg-color($carousel-control-color);
+  }
+}
+
+.carousel-control-prev {
+  @extend .carousel-control-prev-icon;
+  @include bg-color($carousel-control-color);
+  &:hover,
+  &:focus {
+    @include bg-color($carousel-control-color);
+  }
+}
+
+// Carousel indicators
+.carousel-indicators {
+  bottom: 10px;
+
+  .active {
+    @include bg-color($carousel-indicator-active-bg);
+  }
+}
+
+// Customize the carousel item appearance
+.carousel-item {
+  transition: transform 0.6s ease;
+
+  &.active,
+  &:not(.carousel-item-right):not(.carousel-item-left) {
+    display: block;
+  }
+
+  &.carousel-item-next.carousel-item-left,
+  &.carousel-item-prev.carousel-item-right {
+    transform: translateX(0);
+  }
+
+  &.carousel-item-next,
+  &.carousel-item-prev {
+    transform: translateX(-100%);
+  }
+}
