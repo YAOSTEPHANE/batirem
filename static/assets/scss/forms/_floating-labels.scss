@@ -5,32 +5,34 @@
   > .form-select {
     height: $form-floating-height;
     padding: $form-floating-padding-y $form-floating-padding-x;
+    box-sizing: border-box;
   }
 
   > label {
     position: absolute;
     top: 0;
     left: 0;
-    height: 100%; // allow textareas
+    height: 100%;
     padding: $form-floating-padding-y $form-floating-padding-x;
-    pointer-events: none;
-    border: $input-border-width solid transparent; // Required for aligning label's text with the input as it affects inner box model
+    user-select: none;
+    border: $input-border-width solid transparent;
     transform-origin: 0 0;
-    @include transition($form-floating-transition);
+    z-index: 1;
+    transition: transform 0.2s ease-out, opacity 0.2s ease-out;
+    -webkit-transition: -webkit-transform 0.2s ease-out, opacity 0.2s ease-out;
+    -moz-transition: -moz-transform 0.2s ease-out, opacity 0.2s ease-out;
+    -ms-transition: -ms-transform 0.2s ease-out, opacity 0.2s ease-out;
+    -o-transition: -o-transform 0.2s ease-out, opacity 0.2s ease-out;
   }
 
-  // stylelint-disable no-duplicate-selectors
   > .form-control {
     &::placeholder {
       color: transparent;
     }
 
     &:focus,
-    &:not(:placeholder-shown) {
-      padding-top: $form-floating-input-padding-t;
-      padding-bottom: $form-floating-input-padding-b;
-    }
-    // Duplicated because `:-webkit-autofill` invalidates other selectors when grouped
+    &:not(:placeholder-shown),
+    &:required:valid,
     &:-webkit-autofill {
       padding-top: $form-floating-input-padding-t;
       padding-bottom: $form-floating-input-padding-b;
@@ -44,18 +46,4 @@
 
   > .form-control:focus,
   > .form-control:not(:placeholder-shown),
-  > .form-select {
-    ~ label {
-      opacity: $form-floating-label-opacity;
-      transform: $form-floating-label-transform;
-    }
-  }
-  // Duplicated because `:-webkit-autofill` invalidates other selectors when grouped
-  > .form-control:-webkit-autofill {
-    ~ label {
-      opacity: $form-floating-label-opacity;
-      transform: $form-floating-label-transform;
-    }
-  }
-  // stylelint-enable no-duplicate-selectors
-}
+  >
