@@ -2,6 +2,12 @@
 
 import ckeditor_uploader.fields
 from django.db import migrations
+from django.db.models import TextChoices
+
+
+class DescriptionChoices(TextChoices):
+    PRODUCT = 'PRODUCT', 'Product Description'
+    VENDOR = 'VENDOR', 'Vendor Description'
 
 
 class Migration(migrations.Migration):
@@ -14,16 +20,28 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='product',
             name='description',
-            field=ckeditor_uploader.fields.RichTextUploadingField(blank=True, default='This is the product', null=True),
+            field=ckeditor_uploader.fields.RichTextUploadingField(
+                blank=True,
+                default=DescriptionChoices.PRODUCT,
+                help_text='Enter a description for this product',
+                null=True,
+                verbose_name='Product Description',
+            ),
         ),
         migrations.AlterField(
             model_name='product',
             name='specifications',
-            field=ckeditor_uploader.fields.RichTextUploadingField(blank=True, null=True),
+            field=ckeditor_uploader.fields.RichTextUploadingField(
+                blank=True,
+                help_text='Enter the specifications for this product',
+                null=True,
+                verbose_name='Product Specifications',
+            ),
         ),
         migrations.AlterField(
             model_name='vendor',
             name='description',
-            field=ckeditor_uploader.fields.RichTextUploadingField(blank=True, default='I am am Amazing Vendor', null=True),
-        ),
-    ]
+            field=ckeditor_uploader.fields.RichTextUploadingField(
+                blank=True,
+                default=DescriptionChoices.VENDOR,
+                help_text='Enter a description for this vendor
