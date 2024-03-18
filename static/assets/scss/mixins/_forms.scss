@@ -1,50 +1,56 @@
-// This mixin uses an `if()` technique to be compatible with Dart Sass
-// See https://github.com/sass/sass/issues/1873#issuecomment-152293725 for more details
+// Mixin to select elements based on validation state
 @mixin form-validation-state-selector($state) {
-  @if ($state == "valid" or $state == "invalid") {
-    .was-validated #{if(&, "&", "")}:#{$state},
-    #{if(&, "&", "")}.is-#{$state} {
-      @content;
-    }
-  } @else {
-    #{if(&, "&", "")}.is-#{$state} {
+  $selectors: (
+    ".was-validated &.#{$state}",
+    "&.is-#{$state}"
+  );
+
+  @each $selector in $selectors {
+    #{$selector} {
       @content;
     }
   }
 }
 
+// Mixin to style elements based on validation state
 @mixin form-validation-state(
   $state,
-  $color,
-  $icon,
-  $tooltip-color: color-contrast($color),
-  $tooltip-bg-color: rgba($color, $form-feedback-tooltip-opacity),
-  $focus-box-shadow: 0 0 0 $input-focus-width rgba($color, $input-btn-focus-color-opacity)
+  $color: null,
+  $icon: null,
+  $tooltip-color: null,
+  $tooltip-bg-color: null,
+  $focus-box-shadow: null
 ) {
-  .#{$state}-feedback {
+  // Default values for variables
+  $form-feedback-margin-top: 0.25rem !default;
+  $form-feedback-font-size: 0.75rem !default;
+  $form-feedback-font-style: italic !default;
+  $form-feedback-tooltip-padding-y: 0.25rem !default;
+  $form-feedback-tooltip-padding-x: 0.5rem !default;
+  $form-feedback-tooltip-font-size: 0.75rem !default;
+  $form-feedback-tooltip-line-height: 1.5 !default;
+  $form-feedback-tooltip-border-radius: 0.25rem !default;
+  $form-feedback-tooltip-margin-top: 0.1rem !default;
+  $input-focus-width: 2px !default;
+  $input-btn-focus-color-opacity: 0.25 !default;
+  $enable-validation-icons: true !default;
+
+  // Hide feedback elements by default
+  .#{$state}-feedback,
+  .#{$state}-tooltip {
     display: none;
-    width: 100%;
-    margin-top: $form-feedback-margin-top;
-    @include font-size($form-feedback-font-size);
-    font-style: $form-feedback-font-style;
-    color: $color;
+  }
+
+  // Style feedback elements
+  .#{$state}-feedback {
+    @extend %form-feedback;
   }
 
   .#{$state}-tooltip {
-    position: absolute;
-    top: 100%;
-    z-index: 5;
-    display: none;
-    max-width: 100%; // Contain to parent when possible
-    padding: $form-feedback-tooltip-padding-y $form-feedback-tooltip-padding-x;
-    margin-top: .1rem;
-    @include font-size($form-feedback-tooltip-font-size);
-    line-height: $form-feedback-tooltip-line-height;
-    color: $tooltip-color;
-    background-color: $tooltip-bg-color;
-    @include border-radius($form-feedback-tooltip-border-radius);
+    @extend %form-tooltip;
   }
 
+  // Show feedback elements when the parent is validated and has the given state
   @include form-validation-state-selector($state) {
     ~ .#{$state}-feedback,
     ~ .#{$state}-tooltip {
@@ -52,10 +58,12 @@
     }
   }
 
+  // Style the form control
   .form-control {
     @include form-validation-state-selector($state) {
       border-color: $color;
 
+      // Add validation icons if enabled
       @if $enable-validation-icons {
         padding-right: $input-height-inner;
         background-image: escape-svg($icon);
@@ -64,6 +72,7 @@
         background-size: $input-height-inner-half $input-height-inner-half;
       }
 
+      // Style the focus state
       &:focus {
         border-color: $color;
         box-shadow: $focus-box-shadow;
@@ -71,9 +80,10 @@
     }
   }
 
-  // stylelint-disable-next-line selector-no-qualifying-type
+  // Style the textarea
   textarea.form-control {
     @include form-validation-state-selector($state) {
+      // Add validation icons if enabled
       @if $enable-validation-icons {
         padding-right: $input-height-inner;
         background-position: top $input-height-inner-quarter right $input-height-inner-quarter;
@@ -81,10 +91,12 @@
     }
   }
 
+  // Style the form select
   .form-select {
     @include form-validation-state-selector($state) {
       border-color: $color;
 
+      // Add validation icons if enabled
       @if $enable-validation-icons {
         padding-right: $form-select-feedback-icon-padding-end;
         background-image: escape-svg($form-select-indicator), escape-svg($icon);
@@ -92,6 +104,7 @@
         background-size: $form-select-bg-size, $form-select-feedback-icon-size;
       }
 
+      // Style the focus state
       &:focus {
         border-color: $color;
         box-shadow: $focus-box-shadow;
@@ -99,26 +112,27 @@
     }
   }
 
+  // Style the form check input
   .form-check-input {
     @include form-validation-state-selector($state) {
       border-color: $color;
 
+      // Style the checked state
       &:checked {
         background-color: $color;
       }
 
+      // Style the focus state
       &:focus {
         box-shadow: $focus-box-shadow;
       }
 
+      // Style the form check label
       ~ .form-check-label {
         color: $color;
       }
     }
   }
-  .form-check-inline .form-check-input {
-    ~ .#{$state}-feedback {
-      margin-left: .5em;
-    }
-  }
-}
+
+  // Style the form check inline input
+  .form-check-inline
