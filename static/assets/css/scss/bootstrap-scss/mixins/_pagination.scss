@@ -1,1 +1,54 @@
-No Content: https://wp.alithemes.com/html/nest/backend/assets/css/scss/bootstrap-scss/mixins/_pagination.scss
+// Mixin for pagination
+@mixin pagination($active-color: $brand-primary, $disabled-color: $gray-400, $background-color: $white, $item-border-color: $gray-300, $hover-color: darken($background-color, 5%)) {
+  // Pagination styles
+  .pagination {
+    display: flex;
+    padding-left: 0;
+    list-style: none;
+    border-radius: $border-radius;
+
+    // Individual pagination item styles
+    & > li {
+      display: inline-block;
+
+      // Active pagination item styles
+      &.active {
+        color: $active-color;
+        background-color: $background-color;
+        border-color: $active-color;
+
+        // Active pagination item hover styles
+        &:hover {
+          color: $active-color;
+          background-color: lighten($background-color, 10%);
+          border-color: $active-color;
+        }
+      }
+
+      // Disabled pagination item styles
+      &.disabled,
+      &:disabled {
+        color: $disabled-color;
+        background-color: $background-color;
+        border-color: $disabled-color;
+
+        // Disabled pagination item hover styles
+        &:hover {
+          color: $disabled-color;
+          background-color: $background-color;
+          border-color: $disabled-color;
+          cursor: not-allowed;
+        }
+      }
+
+      // Pagination item hover styles
+      &:hover {
+        color: $hover-color;
+        background-color: $background-color;
+        border-color: $hover-color;
+      }
+
+      // Pagination item styles
+      & {
+        a,
+        span {
