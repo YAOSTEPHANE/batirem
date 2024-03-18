@@ -12,22 +12,22 @@ class Migration(migrations.Migration):
     operations = [
         migrations.AddField(
             model_name='product',
-            name='life',
+            name='life_span',
             field=models.CharField(blank=True, default='100 Days', max_length=100, null=True),
         ),
         migrations.AddField(
             model_name='product',
-            name='mfd',
+            name='manufacturing_date',
             field=models.DateTimeField(blank=True, null=True),
         ),
         migrations.AddField(
             model_name='product',
-            name='stock_count',
+            name='stock_quantity',
             field=models.CharField(blank=True, default='10', max_length=100, null=True),
         ),
         migrations.AddField(
             model_name='product',
-            name='type',
+            name='product_type',
             field=models.CharField(blank=True, default='Organic', max_length=100, null=True),
         ),
     ]
