@@ -1,24 +1,20 @@
-//
-// Labels
-//
+/* Form labels */
 
 .form-label {
   margin-bottom: $form-label-margin-bottom;
   @include font-size($form-label-font-size);
-  font-style: $form-label-font-style;
-  font-weight: $form-label-font-weight;
+  @include font-weight($form-label-font-weight, $form-label-font-style);
   color: $form-label-color;
 }
 
-// For use with horizontal and inline forms, when you need the label (or legend)
-// text to align with the form controls.
+/* For use with horizontal and inline forms, when you need the label (or legend)
+text to align with the form controls. */
 .col-form-label {
   padding-top: add($input-padding-y, $input-border-width);
   padding-bottom: add($input-padding-y, $input-border-width);
-  margin-bottom: 0; // Override the `<legend>` default
-  @include font-size(inherit); // Override the `<legend>` default
-  font-style: $form-label-font-style;
-  font-weight: $form-label-font-weight;
+  margin-bottom: 0;
+  @include font-size(inherit);
+  @include font-weight($form-label-font-weight, $form-label-font-style);
   line-height: $input-line-height;
   color: $form-label-color;
 }
@@ -33,4 +29,9 @@
   padding-top: add($input-padding-y-sm, $input-border-width);
   padding-bottom: add($input-padding-y-sm, $input-border-width);
   @include font-size($input-font-size-sm);
+}
+
+/* Form label with a different color */
+.form-label-secondary {
+  color: $form-label-secondary-color;
 }
