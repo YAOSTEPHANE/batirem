@@ -8,13 +8,25 @@
   > .btn {
     position: relative;
     flex: 1 1 auto;
+
+    &:focus {
+      box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+    }
+
+    &:disabled {
+      opacity: 0.65;
+      cursor: not-allowed;
+    }
+
+    &:hover {
+      background-color: #f5f5f5;
+    }
   }
 
   // Bring the hover, focused, and "active" buttons to the front to overlay
   // the borders properly
   > .btn-check:checked + .btn,
   > .btn-check:focus + .btn,
-  > .btn:hover,
   > .btn:focus,
   > .btn:active,
   > .btn.active {
@@ -26,7 +38,7 @@
 .btn-toolbar {
   display: flex;
   flex-wrap: wrap;
-  justify-content: flex-start;
+  justify-content: space-between;
 
   .input-group {
     width: auto;
@@ -108,32 +120,4 @@
 
 
 //
-// Vertical button groups
-//
-
-.btn-group-vertical {
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: center;
-
-  > .btn,
-  > .btn-group {
-    width: 100%;
-  }
-
-  > .btn:not(:first-child),
-  > .btn-group:not(:first-child) {
-    margin-top: -$btn-border-width;
-  }
-
-  // Reset rounded corners
-  > .btn:not(:last-child):not(.dropdown-toggle),
-  > .btn-group:not(:last-child) > .btn {
-    @include border-bottom-radius(0);
-  }
-
-  > .btn ~ .btn,
-  > .btn-group:not(:first-child) > .btn {
-    @include border-top-radius(0);
-  }
-}
+// Vertical
