@@ -1,12 +1,16 @@
 from django.urls import path
-from userauths import views
+from userauths.views import (
+    register_view,
+    login_view,
+    logout_view,
+    profile_update,
+)
 
 app_name = "userauths"
 
 urlpatterns = [
-    path("sign-up/", views.register_view, name="sign-up"),
-    path("sign-in/", views.login_view, name="sign-in"),
-    path("sign-out/", views.logout_view, name="sign-out"),
-
-    path("profile/update/", views.profile_update, name="profile-update"),
+    path("sign-up/", register_view, name="sign_up"),
+    path("sign-in/", login_view, name="sign_in"),
+    path("sign-out/", logout_view, name="sign_out"),
+    path("profile/update/", profile_update, name="profile_update"),
 ]
