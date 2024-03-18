@@ -1,1 +1,12 @@
-No Content: https://wp.alithemes.com/html/nest/backend/assets/css/scss/bootstrap-scss/_dropdown.scss
+// Core variables and mixins
+@import "core/variables";
+@import "core/mixins";
+
+// Grid system and responsive utilities
+@import "grid";
+
+// Components
+@import "components/dropdown"; // Include the new _dropdown.scss
+
+// Utilities
+@import "utilities/api";
