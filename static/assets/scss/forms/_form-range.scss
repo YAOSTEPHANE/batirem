@@ -10,9 +10,11 @@
   padding: 0; // Need to reset padding
   background-color: transparent;
   appearance: none;
+  user-select: none; // Prevent text selection
 
   &:focus {
     outline: 0;
+    -webkit-appearance: none; // Remove default focus style in Webkit browsers
 
     // Pseudo-elements must be split across multiple rulesets to have an effect.
     // No box-shadow() mixin for focus accessibility.
@@ -24,59 +26,42 @@
     border: 0;
   }
 
-  &::-webkit-slider-thumb {
-    width: $form-range-thumb-width;
-    height: $form-range-thumb-height;
-    margin-top: ($form-range-track-height - $form-range-thumb-height) / 2; // Webkit specific
-    @include gradient-bg($form-range-thumb-bg);
-    border: $form-range-thumb-border;
-    @include border-radius($form-range-thumb-border-radius);
-    @include box-shadow($form-range-thumb-box-shadow);
-    @include transition($form-range-thumb-transition);
-    appearance: none;
-
-    &:active {
-      @include gradient-bg($form-range-thumb-active-bg);
-    }
-  }
-
-  &::-webkit-slider-runnable-track {
-    width: $form-range-track-width;
-    height: $form-range-track-height;
-    color: transparent; // Why?
-    cursor: $form-range-track-cursor;
-    background-color: $form-range-track-bg;
-    border-color: transparent;
-    @include border-radius($form-range-track-border-radius);
-    @include box-shadow($form-range-track-box-shadow);
-  }
-
+  // Thumb styles
+  &::-webkit-slider-thumb,
   &::-moz-range-thumb {
     width: $form-range-thumb-width;
     height: $form-range-thumb-height;
-    @include gradient-bg($form-range-thumb-bg);
+    margin-top: ($form-range-track-height - $form-range-thumb-height) / 2; // Webkit specific
+    background-color: $form-range-thumb-bg;
     border: $form-range-thumb-border;
-    @include border-radius($form-range-thumb-border-radius);
-    @include box-shadow($form-range-thumb-box-shadow);
-    @include transition($form-range-thumb-transition);
+    border-radius: $form-range-thumb-border-radius;
+    box-shadow: $form-range-thumb-box-shadow;
+    transition: $form-range-thumb-transition;
     appearance: none;
 
     &:active {
-      @include gradient-bg($form-range-thumb-active-bg);
+      background-color: $form-range-thumb-active-bg;
     }
   }
 
+  // Track styles
+  &::-webkit-slider-runnable-track,
   &::-moz-range-track {
     width: $form-range-track-width;
     height: $form-range-track-height;
     color: transparent;
     cursor: $form-range-track-cursor;
     background-color: $form-range-track-bg;
-    border-color: transparent; // Firefox specific?
-    @include border-radius($form-range-track-border-radius);
-    @include box-shadow($form-range-track-box-shadow);
+    border-radius: $form-range-track-border-radius;
+    box-shadow: $form-range-track-box-shadow;
+    background-image: -webkit-linear-gradient(left, transparent 50%, rgba(0, 0, 0, 0.1) 50%), -webkit-linear-gradient(top, transparent 50%, rgba(0, 0, 0, 0.1) 50%);
+    background-image: linear-gradient(to right, transparent 50%, rgba(0, 0, 0, 0.1) 50%), linear-gradient(to top, transparent 50%, rgba(0, 0, 0, 0.1) 50%);
+    background-size: 2px 100%, 100% 2px;
+    background-position: 0 0, 0 0;
+    background-repeat: no-repeat;
   }
 
+  // Disabled styles
   &:disabled {
     pointer-events: none;
 
@@ -85,7 +70,4 @@
     }
 
     &::-moz-range-thumb {
-      background-color: $form-range-thumb-disabled-bg;
-    }
-  }
-}
+      background-color: $form-range-thumb-disabled-bg
