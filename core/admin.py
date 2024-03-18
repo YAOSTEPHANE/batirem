@@ -1,5 +1,5 @@
 from django.contrib import admin
-from core.models import CartOrderProducts, Product, Category, Vendor, CartOrder, ProductImages, ProductReview, wishlist_model, Address
+from core.models import CartOrderProducts, Product, Category, Vendor, CartOrder, ProductImages, ProductReview, wishlist_model as Wishlist, Address
 
 class ProductImagesAdmin(admin.TabularInline):
     model = ProductImages
@@ -29,20 +29,5 @@ class ProductReviewAdmin(admin.ModelAdmin):
     list_display = ['user', 'product', 'review', 'rating']
 
 
-class wishlistAdmin(admin.ModelAdmin):
-    list_display = ['user', 'product', 'date']
+class WishlistAdmin(admin.ModelAdmin):
 
-
-class AddressAdmin(admin.ModelAdmin):
-    list_editable = ['address', 'status']
-    list_display = ['user', 'address', 'status']
-
-
-admin.site.register(Product, ProductAdmin)
-admin.site.register(Category, CategoryAdmin)
-admin.site.register(Vendor, VendorAdmin)
-admin.site.register(CartOrder, CartOrderAdmin)
-admin.site.register(CartOrderProducts, CartOrderProductsAdmin)
-admin.site.register(ProductReview, ProductReviewAdmin)
-admin.site.register(wishlist_model, wishlistAdmin)
-admin.site.register(Address, AddressAdmin)
