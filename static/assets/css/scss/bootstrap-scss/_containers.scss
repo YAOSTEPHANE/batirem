@@ -1,1 +1,28 @@
-No Content: https://wp.alithemes.com/html/nest/backend/assets/css/scss/bootstrap-scss/_containers.scss
+// Import necessary Bootstrap files
+@import 'bootstrap/scss/functions';
+@import 'bootstrap/scss/variables';
+@import 'bootstrap/scss/mixins';
+
+// Import the containers file
+@import 'bootstrap/scss/containers';
+
+// Add your custom styles below
+.my-container {
+  @extend .container;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+}
+
+
+sass styles.scss styles.css
+
+
+|-- scss/
+|   |-- styles.scss
+|   |-- bootstrap/
+|       |-- _containers.scss
+|       |-- functions/
+|       |-- variables/
+|       |-- mixins/
+|-- css/
+|   |-- styles
