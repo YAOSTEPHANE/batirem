@@ -1,32 +1,32 @@
 $(function() {
+  'use strict';
 
-    'use strict';
+  /**
+   * Generating PDF from HTML using jQuery
+   */
+  $(document).on('click', '#invoice_download_btn', function() {
+    const content = $('#invoice_wrapper');
+    const topLeftMargin = 20;
+    const pdfWidth = content.width() + (topLeftMargin * 2);
+    const pdfHeight = (pdfWidth * 1.5) + (topLeftMargin * 2);
+    const canvasImageWidth = content.width();
+    const canvasImageHeight = content.height();
+    const totalPDFPages = Math.ceil(content.height() / pdfHeight) - 1;
 
-    /**
-     * Generating PDF from HTML using jQuery
-     */
-    $(document).on('click', '#invoice_download_btn', function() {
-        var contentWidth = $("#invoice_wrapper").width();
-        var contentHeight = $("#invoice_wrapper").height();
-        var topLeftMargin = 20;
-        var pdfWidth = contentWidth + (topLeftMargin * 2);
-        var pdfHeight = (pdfWidth * 1.5) + (topLeftMargin * 2);
-        var canvasImageWidth = contentWidth;
-        var canvasImageHeight = contentHeight;
-        var totalPDFPages = Math.ceil(contentHeight / pdfHeight) - 1;
+    html2canvas(content[0], { allowTaint: true }).then(function(canvas) {
+      const imgData = canvas.toDataURL("image/jpeg", 1.0);
+      const pdf = new jsPDF('p', 'pt', [pdfWidth, pdfHeight]);
 
-        html2canvas($("#invoice_wrapper")[0], {
-            allowTaint: true
-        }).then(function(canvas) {
-            canvas.getContext('2d');
-            var imgData = canvas.toDataURL("image/jpeg", 1.0);
-            var pdf = new jsPDF('p', 'pt', [pdfWidth, pdfHeight]);
-            pdf.addImage(imgData, 'JPG', topLeftMargin, topLeftMargin, canvasImageWidth, canvasImageHeight);
-            for (var i = 1; i <= totalPDFPages; i++) {
-                pdf.addPage(pdfWidth, pdfHeight);
-                pdf.addImage(imgData, 'JPG', topLeftMargin, -(pdfHeight * i) + (topLeftMargin * 4), canvasImageWidth, canvasImageHeight);
-            }
-            pdf.save("invoice.pdf");
-        });
+      for (let i = 0; i <= totalPDFPages; i++) {
+        const currentHeight = (i === 0) ? canvasImageHeight : pdfHeight;
+        pdf.addImage(imgData, 'JPG', topLeftMargin, topLeftMargin, canvasImageWidth, currentHeight);
+
+        if (i < totalPDFPages) {
+          pdf.addPage(pdfWidth, pdfHeight);
+        }
+      }
+
+      pdf.save("invoice.pdf");
     });
-})
+  });
+});
