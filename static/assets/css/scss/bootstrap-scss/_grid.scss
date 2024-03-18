@@ -1,1 +1,52 @@
-No Content: https://wp.alithemes.com/html/nest/backend/assets/css/scss/bootstrap-scss/_grid.scss
+// Variables
+$grid-columns: 12;
+$grid-gutter-width: 30px;
+
+// Container
+.container {
+  max-width: 1140px;
+  margin-right: auto;
+  margin-left: auto;
+
+  &::after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+}
+
+// Grid system
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  margin-right: -$grid-gutter-width;
+  margin-left: -$grid-gutter-width;
+
+  &::after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+
+  // Grid columns
+  [class*="col-"] {
+    flex-basis: 0;
+    flex-grow: 1;
+    max-width: 100%;
+    position: relative;
+    width: 100%;
+    padding-right: $grid-gutter-width;
+    padding-left: $grid-gutter-width;
+
+    &:first-child {
+      margin-left: 0;
+    }
+
+    &:last-child {
+      margin-right: 0;
+    }
+
+    // Grid column sizes
+    &.col-1 { width: calc(100% / #{$grid-columns} * 1 - #{$grid-gutter-width} * 0.9375); }
+    &.col-2 { width: calc(100% / #{$grid-columns} * 2 - #{$grid-gutter-width} * 0.9375); }
+    &.col-3 {
