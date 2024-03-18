@@ -1,1 +1,24 @@
-No Content: https://wp.alithemes.com/html/nest/backend/assets/css/scss/bootstrap-scss/mixins/_border-radius.scss
+// Import necessary Bootstrap SCSS files
+@import "~bootstrap/scss/functions";
+@import "~bootstrap/scss/variables";
+@import "~bootstrap/scss/mixins/_border-radius";
+
+// Use the border-radius mixin to set border-radius for an element
+.element {
+  @include border-radius(.25rem);
+}
+
+// You can also pass custom values to the mixin
+.element-rounded {
+  @include border-radius(1rem);
+}
+
+// Or use the predefined border-radius variables
+.element-pill {
+  @include border-radius-pill();
+}
+
+// Or use the predefined border-radius classes
+.btn-rounded {
+  @extend .rounded-pill;
+}
