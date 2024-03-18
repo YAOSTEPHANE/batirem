@@ -1,22 +1,27 @@
-// List Groups
+// List Group Variants
+$list-group-variants: (
+  "primary": ($blue: #0074d9, $light-blue: #e8f0fe, $white: #fff),
+  "secondary": ($gray: #6c757d, $light-gray: #e9ecef, $white: #fff),
+  "success": ($green: #28a745, $light-green: #d4edda, $white: #fff),
+  "danger": ($red: #dc3545, $light-red: #f8d7da, $white: #fff),
+  "warning": ($yellow: #ffc107, $light-yellow: #fff3cd, $white: #fff),
+  "info": ($cyan: #17a2b8, $light-cyan: #c9e5ef, $white: #fff),
+  "light": ($light: #f8f9fa, $lightest: #fdfdfd, $dark: #343a40),
+  "dark": ($dark: #343a40, $darker: #1b1e21, $white: #f8f9fa)
+);
 
-@mixin list-group-item-variant($state, $background, $color) {
-  .list-group-item-#{$state} {
+@function list-group-variant-colors($variant) {
+  $variant-map: map-get($list-group-variants, $variant);
+  @return map-get($variant-map, 1), map-get($variant-map, 2), map-get($variant-map, 3);
+}
+
+@mixin list-group-item-variant($variant, $state: null) {
+  $colors: list-group-variant-colors($variant);
+  $background: nth($colors, 1);
+  $color: nth($colors, 2);
+  $active-background: nth($colors, 3);
+
+  .list-group-item-#{$variant} {
     color: $color;
     background-color: $background;
 
-    &.list-group-item-action {
-      &:hover,
-      &:focus {
-        color: $color;
-        background-color: shade-color($background, 10%);
-      }
-
-      &.active {
-        color: $white;
-        background-color: $color;
-        border-color: $color;
-      }
-    }
-  }
-}
