@@ -6,18 +6,7 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('core', '0017_alter_product_description_and_more'),
+        ('core', '0017'),
     ]
 
-    operations = [
-        migrations.AlterField(
-            model_name='product',
-            name='description',
-            field=models.TextField(blank=True, default='This is the product', null=True),
-        ),
-        migrations.AlterField(
-            model_name='vendor',
-            name='description',
-            field=models.TextField(blank=True, default='I am am Amazing Vendor', null=True),
-        ),
-    ]
+
