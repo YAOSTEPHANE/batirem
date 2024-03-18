@@ -1,1 +1,57 @@
-No Content: https://wp.alithemes.com/html/nest/backend/assets/css/scss/bootstrap-scss/_navbar.scss
+// Custom navbar styles
+
+// Import Bootstrap's navbar components
+@import "bootstrap/scss/_navbar.scss";
+
+// Customize the navbar background color
+$navbar-bg: #333;
+
+// Customize the navbar link color
+$navbar-color: #fff;
+
+// Customize the navbar brand logo color
+$navbar-brand-color: #fff;
+
+// Customize the navbar toggle button color
+$navbar-toggler-icon-bg: #fff;
+
+// Customize the navbar hover and active link color
+$navbar-hover-color: #ccc;
+$navbar-active-color: #eee;
+
+// Customize the navbar border
+$navbar-border: 0;
+
+// Customize the navbar padding
+$navbar-padding-y: 0.5rem;
+
+// Customize the navbar font size
+$navbar-font-size: 1rem;
+
+// Customize the navbar font weight
+$navbar-font-weight: 600;
+
+// Customize the navbar text transform
+$navbar-text-transform: none;
+
+// Customize the navbar shadow
+$navbar-shadow: none;
+
+// Customize the navbar border radius
+$navbar-border-radius: 0;
+
+// Customize the navbar transition
+$navbar-transition: none;
+
+// Compile the navbar styles
+.navbar {
+  background-color: $navbar-bg;
+  border: $navbar-border;
+  border-radius: $navbar-border-radius;
+  box-shadow: $navbar-shadow;
+  transition: $navbar-transition;
+
+  & .navbar-brand {
+    color: $navbar-brand-color;
+    font-size: $navbar-font-size;
+    font-weight: $
