@@ -1,1 +1,17 @@
-No Content: https://wp.alithemes.com/html/nest/backend/assets/css/scss/bootstrap-scss/_pagination.scss
+npm install sass-loader node-sass css-loader --save-dev
+
+
+module.exports = {
+  css: {
+    loaderOptions: {
+      sass: {
+        prependData: `@import "@/styles/variables.scss";`
+      }
+    }
+  }
+}
+
+
+<style lang="scss" scoped>
+@import "~@/styles/bootstrap-scss/_pagination.scss";
+</style>
