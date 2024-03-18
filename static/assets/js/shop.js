@@ -1,7 +1,8 @@
 (function($) {
     'use strict';
-    /*Product Details*/
-    var productDetails = function() {
+
+    // Product Details
+    function productDetails() {
         $('.product-image-slider').slick({
             slidesToShow: 1,
             slidesToScroll: 1,
@@ -16,47 +17,56 @@
             asNavFor: '.product-image-slider',
             dots: false,
             focusOnSelect: true,
-
             prevArrow: '<button type="button" class="slick-prev"><i class="fi-rs-arrow-small-left"></i></button>',
             nextArrow: '<button type="button" class="slick-next"><i class="fi-rs-arrow-small-right"></i></button>'
         });
 
         // Remove active class from all thumbnail slides
-        $('.slider-nav-thumbnails .slick-slide').removeClass('slick-active');
+        $sliderNavThumbnails = $('.slider-nav-thumbnails .slick-slide');
+        $sliderNavThumbnails.removeClass('slick-active');
 
         // Set active class to first thumbnail slides
-        $('.slider-nav-thumbnails .slick-slide').eq(0).addClass('slick-active');
+        $sliderNavThumbnails.eq(0).addClass('slick-active');
 
         // On before slide change match active thumbnail to current slide
-        $('.product-image-slider').on('beforeChange', function(event, slick, currentSlide, nextSlide) {
+        $productImageSlider = $('.product-image-slider');
+        $productImageSlider.on('beforeChange', function(event, slick, currentSlide, nextSlide) {
             var mySlideNumber = nextSlide;
-            $('.slider-nav-thumbnails .slick-slide').removeClass('slick-active');
-            $('.slider-nav-thumbnails .slick-slide').eq(mySlideNumber).addClass('slick-active');
+            $sliderNavThumbnails.removeClass('slick-active');
+            $sliderNavThumbnails.eq(mySlideNumber).addClass('slick-active');
+
+            var img = $($productImageSlider.slick('slickGoTo', mySlideNumber)).find("img");
+            if ($(window).width() > 768) {
+                try {
+                    $(img).elevateZoom({
+                        zoomType: "inner",
+                        cursor: "crosshair",
+                        zoomWindowFadeIn: 500,
+                        zoomWindowFadeOut: 750
+                    });
+                } catch (e) {
+                    console.error('Error calling elevateZoom:', e);
+                }
+            }
         });
 
-        $('.product-image-slider').on('beforeChange', function(event, slick, currentSlide, nextSlide) {
-            var img = $(slick.$slides[nextSlide]).find("img");
-            $('.zoomWindowContainer,.zoomContainer').remove();
+        //Elevate Zoom
+        $productImageSlider.on('init', function() {
             if ($(window).width() > 768) {
-                $(img).elevateZoom({
-                    zoomType: "inner",
-                    cursor: "crosshair",
-                    zoomWindowFadeIn: 500,
-                    zoomWindowFadeOut: 750
-                });
+                $img = $productImageSlider.find(".slick-active img");
+                try {
+                    $img.elevateZoom({
+                        zoomType: "inner",
+                        cursor: "crosshair",
+                        zoomWindowFadeIn: 500,
+                        zoomWindowFadeOut: 750
+                    });
+                } catch (e) {
+                    console.error('Error calling elevateZoom:', e);
+                }
             }
         });
-        //Elevate Zoom
-        if ($(".product-image-slider").length) {
-            if ($(window).width() > 768) {
-                $('.product-image-slider .slick-active img').elevateZoom({
-                    zoomType: "inner",
-                    cursor: "crosshair",
-                    zoomWindowFadeIn: 500,
-                    zoomWindowFadeOut: 750
-                });
-            }
-        }
+
         //Filter color/Size
         $('.list-filter').each(function() {
             $(this).find('a').on('click', function(event) {
@@ -67,6 +77,7 @@
                 $(this).parents('.attr-detail').find('.current-color').text($(this).attr('data-color'));
             });
         });
+
         //Qty Up-Down
         $('.detail-qty').each(function() {
             var qtyval = parseInt($(this).find(".qty-val").val(), 10);
@@ -92,7 +103,7 @@
         $('.dropdown-menu .cart_list').on('click', function(event) {
             event.stopPropagation();
         });
-    };
+    }
 
     //Load functions
     $(document).ready(function() {
@@ -100,10 +111,3 @@
     });
 
 })(jQuery);
-
-
-
-
-
-
-
