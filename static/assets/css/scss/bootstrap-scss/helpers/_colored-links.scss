@@ -1,1 +1,22 @@
-No Content: https://wp.alithemes.com/html/nest/backend/assets/css/scss/bootstrap-scss/helpers/_colored-links.scss
+// Define a map of colors to use for links
+$link-colors: (
+  "primary": $color-primary,
+  "secondary": $color-secondary,
+  "success": $color-success,
+  "danger": $color-danger,
+  "warning": $color-warning,
+  "info": $color-info,
+  "light": $color-light,
+  "dark": $color-dark
+);
+
+// Loop through the map and create a class for each color
+@each $name, $color in $link-colors {
+  .colored-link-#{$name} {
+    color: $color;
+
+    &:hover {
+      color: darken($color, 10%);
+    }
+  }
+}
