@@ -1,1 +1,15 @@
-No Content: http://wp.alithemes.com/html/nest/demo/assets/sass/abstracts/_functions.scss
+// Base font size in pixels (default: 16px)
+$base-font-size: 16px !default;
+
+// Function to convert pixels to rem units
+@function px-to-rem($size) {
+  // Calculate the rem value based on the base font size
+  $rem: #{(#{$size} / #{$base-font-size}) * 1rem};
+  // Round the rem value to two decimal places
+  @return #{(round($rem, 2))};
+}
+
+// Usage example
+.example {
+  font-size: px-to-rem(14px);
+}
