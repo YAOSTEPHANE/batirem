@@ -1,16 +1,41 @@
 // Image Mixins
-// - Responsive image
-// - Retina image
+// - Responsive Image
+// - Retina Image
 
-
-// Responsive image
-//
-// Keep images from scaling beyond the width of their parents.
-
-@mixin img-fluid {
-  // Part 1: Set a maximum relative to the parent
+// Responsive Image
+// 
+// Makes images responsive by setting a maximum width
+// relative to the parent and overriding the height to auto.
+@mixin responsive-image {
+  // Set a maximum relative to the parent
   max-width: 100%;
-  // Part 2: Override the height to auto, otherwise images will be stretched
-  // when setting a width and height attribute on the img element.
+  // Override the height to auto
   height: auto;
 }
+
+// Retina Image
+// 
+// Generates high-resolution background images for retina displays.
+@mixin retina-image($regular, $retina) {
+  // Define the background image for regular displays
+  background-image: url("#{$regular}");
+  // Define the background image for retina displays
+  @media
+    (-webkit-min-device-pixel-ratio: 2),
+    (min-resolution: 192dpi) {
+    background-image: url("#{$retina}");
+  }
+}
+
+
+.example {
+  @include responsive-image;
+  @include retina-image('example.png', 'example@2x.png');
+}
+
+
+.example {
+  max-width: 100%;
+  height: auto;
+}
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 19
