@@ -1,11 +1,3 @@
 from django import forms
-from stripe import Review 
-from core.models import ProductReview
-
-
-class ProductReviewForm(forms.ModelForm):
-    review = forms.CharField(widget=forms.Textarea(attrs={'placeholder': "Write review"}))
-
-    class Meta:
-        model = ProductReview
-        fields = ['review', 'rating']
+from django.core.validators import MinValueValidator, MaxValueValidator
+from stripe.models import Review 
