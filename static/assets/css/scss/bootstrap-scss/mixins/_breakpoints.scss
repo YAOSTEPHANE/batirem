@@ -1,1 +1,38 @@
-No Content: https://wp.alithemes.com/html/nest/backend/assets/css/scss/bootstrap-scss/mixins/_breakpoints.scss
+// Define the breakpoints
+$phone: 480px;
+$tablet: 768px;
+$desktop: 992px;
+$large-desktop: 1200px;
+
+// Create the mixin
+@mixin respond-to($breakpoint) {
+  @if $breakpoint == phone {
+    @media (max-width: #{$phone}) {
+      @content;
+    }
+  }
+  @if $breakpoint == tablet {
+    @media (min-width: #{$tablet}) and (max-width: #{$desktop - 1}) {
+      @content;
+    }
+  }
+  @if $breakpoint == desktop {
+    @media (min-width: #{$desktop}) and (max-width: #{$large-desktop - 1}) {
+      @content;
+    }
+  }
+  @if $breakpoint == large-desktop {
+    @media (min-width: #{$large-desktop}) {
+      @content;
+    }
+  }
+}
+
+// Usage example
+.element {
+  width: 100%;
+
+  @include respond-to(tablet) {
+    width: 50%;
+  }
+}
